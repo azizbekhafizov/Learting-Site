@@ -1,38 +1,46 @@
 import { NavLink } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
-export default function Navbar() {
-  const linkClass = ({ isActive }) =>
-    isActive
-      ? "text-teal-500 font-semibold"
-      : "text-gray-600 hover:text-teal-500 transition";
+export default function Navbar({ variant = "guest" }) {
+  const isGuest = variant === "guest";
 
   return (
-    <header className="w-full bg-[#00CBB8] border-b">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        
-        {/* LOGO */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 border-2 border-teal-400 rotate-45 flex items-center justify-center">
-            <span className="-rotate-45 font-bold text-sm text-teal-400">
-              TOTC
-            </span>
-          </div>
-        </div>
+    <header
+      className={`w-full ${
+        isGuest ? "bg-[#00CBB8] text-white" : "bg-white text-gray-700 border-b"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
 
-        <nav className="hidden md:flex items-center gap-10">
-          <NavLink to="/" className={linkClass}>Home</NavLink>
-          <NavLink to="/courses" className={linkClass}>Courses</NavLink>
-          <NavLink to="/careers" className={linkClass}>Careers</NavLink>
-          <NavLink to="/blog" className={linkClass}>Blog</NavLink>
-          <NavLink to="/about" className={linkClass}>About Us</NavLink>
+        {/* LOGO */}
+        <div className="font-bold text-xl">TOTC</div>
+
+        {/* LINKS */}
+        <nav className="hidden md:flex gap-8">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/courses">Courses</NavLink>
+          <NavLink to="/careers">Careers</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/about">About Us</NavLink>
         </nav>
 
-        <div className="flex items-center gap-2">
-            <button className="w-[160px] h-15 bg-[#FFFFFF] rounded-[80px]">Login</button>
-            <button>Sign Up</button>
-        </div>
-
+        {/* RIGHT */}
+        {isGuest ? (
+          <div className="flex gap-3">
+            <button className="px-6 py-2 bg-white text-teal-500 rounded-full">
+              Login
+            </button>
+            <button className="px-6 py-2 bg-teal-600 text-white rounded-full">
+              Sign Up
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 cursor-pointer">
+            <div className="w-8 h-8 bg-gray-300 rounded-full" />
+            <span>Lina</span>
+            <ChevronDown size={16} />
+          </div>
+        )}
       </div>
     </header>
   );

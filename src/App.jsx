@@ -1,14 +1,13 @@
-
-import './App.css'
-import Navbar from './components/Navbar'
+import Navbar from "./components/Navbar";
+import Landing from "./pages/Landing";
 
 function App() {
-
   return (
     <>
-    <Navbar />
+      <Navbar variant="guest" />
+      <Landing />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
